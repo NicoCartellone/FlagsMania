@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens
+package ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +28,7 @@ import ar.edu.unlam.mobile.scaffolding.domain.models.CountryOption
 import ar.edu.unlam.mobile.scaffolding.ui.components.FlagCardGame
 import ar.edu.unlam.mobile.scaffolding.ui.components.GradientComponent
 import ar.edu.unlam.mobile.scaffolding.ui.components.OptionButton
+import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
 
 @Composable
 fun GameClassicScreen(
@@ -37,7 +38,7 @@ fun GameClassicScreen(
     val uiState: GameClassicUIState by viewModel.uiState.collectAsState()
 
     fun goToResult(controller: NavHostController) {
-        controller.navigate("GameResult/classic")
+        controller.navigate(NavHostRouterPaths.GameClassicResult.route)
     }
 
     viewModel.onCounterFinish = {

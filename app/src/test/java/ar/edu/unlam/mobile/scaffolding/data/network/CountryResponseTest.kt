@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.data.network
 
+import ar.edu.unlam.mobile.scaffolding.data.models.CountryResponse
 import org.junit.Test
 
 class CountryResponseTest {

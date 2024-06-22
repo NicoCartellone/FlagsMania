@@ -16,4 +16,8 @@ class GameResultService
         override suspend fun getGameResults(): Flow<List<GameResult>> {
             return gameResultRepository.getGameResults()
         }
+
+        override suspend fun getFirstGameResult(): Flow<GameResult> {
+            return gameResultRepository.getFirstGameResult()
+        }
     }

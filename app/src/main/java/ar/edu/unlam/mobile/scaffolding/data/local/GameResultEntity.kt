@@ -10,6 +10,8 @@ data class GameResultEntity(
     val id: Int = 0,
     val points: Int,
     val correctAnswers: Int,
+    val gameType: String,
+    val gameDate: String,
     val timestamp: Long = System.currentTimeMillis(),
 )
 
@@ -18,6 +20,8 @@ fun GameResultEntity.asModel() =
         id = id.toUInt(),
         points = points,
         correctAnswers = correctAnswers,
+        gameType = gameType,
+        gameDate = gameDate,
         timestamp = timestamp,
     )
 
@@ -25,5 +29,7 @@ fun GameResult.asEntity() =
     GameResultEntity(
         points = points,
         correctAnswers = correctAnswers,
+        gameType = gameType,
+        gameDate = gameDate,
         timestamp = timestamp,
     )

@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.data.network
+package ar.edu.unlam.mobile.scaffolding.data.models
 
 import ar.edu.unlam.mobile.scaffolding.domain.models.CountryOption
 

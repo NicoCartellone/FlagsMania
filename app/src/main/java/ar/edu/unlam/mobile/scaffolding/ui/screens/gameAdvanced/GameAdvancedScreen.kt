@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens
+package ar.edu.unlam.mobile.scaffolding.ui.screens.gameAdvanced
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -28,17 +28,19 @@ import ar.edu.unlam.mobile.scaffolding.R
 import ar.edu.unlam.mobile.scaffolding.ui.components.CardCountryGame
 import ar.edu.unlam.mobile.scaffolding.ui.components.GradientComponent
 import ar.edu.unlam.mobile.scaffolding.ui.components.QuestionFlagsOptions
+import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
+import ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic.GameClassicUIState
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GameAdvancedScreen(
     controller: NavHostController,
-    viewModel: GameClassicViewModel = hiltViewModel(),
+    viewModel: GameAdvancedViewModel = hiltViewModel(),
 ) {
-    val uiState: GameClassicUIState by viewModel.uiState.collectAsState()
+    val uiState: GameAdvancedUIState by viewModel.uiState.collectAsState()
 
     fun goToResult(controller: NavHostController) {
-        controller.navigate("GameResult/advance")
+        controller.navigate(NavHostRouterPaths.GameAdvancedResult.route)
     }
 
     viewModel.onCounterFinish = {
@@ -46,7 +48,7 @@ fun GameAdvancedScreen(
     }
 
     when (uiState) {
-        is GameClassicUIState.Success -> {
+        is GameAdvancedUIState.Success -> {
             Column {
                 Box {
                     GradientComponent(250)
@@ -94,7 +96,7 @@ fun GameAdvancedScreen(
             }
         }
 
-        is GameClassicUIState.Loading -> {
+        is GameAdvancedUIState.Loading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
@@ -114,7 +116,7 @@ fun GameAdvancedScreen(
             }
         }
 
-        is GameClassicUIState.Error -> {
+        is GameAdvancedUIState.Error -> {
             Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
                 Text(text = (uiState as GameClassicUIState.Error).message)
             }

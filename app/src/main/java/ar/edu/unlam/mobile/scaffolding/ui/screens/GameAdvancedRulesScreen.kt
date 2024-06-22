@@ -19,9 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import ar.edu.unlam.mobile.scaffolding.NavHostRouterPaths
 import ar.edu.unlam.mobile.scaffolding.R
 import ar.edu.unlam.mobile.scaffolding.ui.components.CustomButton
+import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 
 @Composable
@@ -73,7 +73,7 @@ fun GameAdvancedRulesScreen(controller: NavHostController) {
             Text(
                 "• Se mostrará el nombre " +
                     "de un país y 4 banderas de todo el mundo, " +
-                    "tendrás 10 segundos para seleccionar la" +
+                    "tendrás 10 segundos para seleccionar la " +
                     "bandera correcta," +
                     " ¿Lograrás acertar las 10 preguntas?",
                 fontSize = 14.sp,
@@ -105,7 +105,7 @@ fun GameAdvancedRulesScreen(controller: NavHostController) {
             Spacer(Modifier.height(24.dp))
             CustomButton(text = "Jugar") {
                 controller.navigate(
-                    NavHostRouterPaths.GAME_ADVANCED.route,
+                    NavHostRouterPaths.GameAdvanced.route,
                 )
             }
         }

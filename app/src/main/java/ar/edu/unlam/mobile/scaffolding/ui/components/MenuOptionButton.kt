@@ -61,7 +61,7 @@ fun MenuOptionButton(
                     fontFamily = AppFont.Quicksand,
                     fontWeight =
                         FontWeight
-                            .Light,
+                            .SemiBold,
                     color =
                         Color.White,
                 )

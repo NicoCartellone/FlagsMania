@@ -12,4 +12,7 @@ interface GameResultDao {
 
     @Query("SELECT * FROM game_results ORDER BY timestamp DESC")
     fun getAllGameResults(): Flow<List<GameResultEntity>>
+
+    @Query("SELECT * FROM game_results ORDER BY timestamp DESC LIMIT 1")
+    fun getFirstGameResult(): Flow<GameResultEntity>
 }

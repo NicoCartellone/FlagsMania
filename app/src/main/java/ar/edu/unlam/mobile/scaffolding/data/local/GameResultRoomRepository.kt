@@ -24,4 +24,10 @@ class GameResultRoomRepository
                 }
             }
         }
+
+        override suspend fun getFirstGameResult(): Flow<GameResult> {
+            return gameResultDao.getFirstGameResult().map {
+                it.asModel()
+            }
+        }
     }

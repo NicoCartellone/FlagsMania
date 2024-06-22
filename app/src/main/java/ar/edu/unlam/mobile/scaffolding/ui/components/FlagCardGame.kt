@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import ar.edu.unlam.mobile.scaffolding.ui.screens.GameClassicViewModel
+import ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic.GameClassicViewModel
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 import coil.compose.AsyncImage
 import coil.decode.SvgDecoder
