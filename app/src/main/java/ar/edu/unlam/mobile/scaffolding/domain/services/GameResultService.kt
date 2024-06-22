@@ -13,11 +13,11 @@ class GameResultService
             gameResultRepository.saveGameResult(gameResult)
         }
 
-        override suspend fun getGameResults(): Flow<List<GameResult>> {
+        override fun getGameResults(): Flow<List<GameResult>> {
             return gameResultRepository.getGameResults()
         }
 
-        override suspend fun getFirstGameResult(): Flow<GameResult> {
+        override fun getFirstGameResult(): Flow<GameResult> {
             return gameResultRepository.getFirstGameResult()
         }
     }

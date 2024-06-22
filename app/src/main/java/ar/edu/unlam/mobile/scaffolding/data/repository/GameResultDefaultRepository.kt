@@ -16,7 +16,7 @@ class GameResultDefaultRepository
             return local.getGameResults()
         }
 
-        override suspend fun getFirstGameResult(): Flow<GameResult> {
+        override fun getFirstGameResult(): Flow<GameResult> {
             return local.getFirstGameResult()
         }
     }

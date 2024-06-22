@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface GameResultUseCase {
     suspend fun saveGameResult(gameResult: GameResult)
 
-    suspend fun getGameResults(): Flow<List<GameResult>>
+    fun getGameResults(): Flow<List<GameResult>>
 
-    suspend fun getFirstGameResult(): Flow<GameResult>
+    fun getFirstGameResult(): Flow<GameResult>
 }

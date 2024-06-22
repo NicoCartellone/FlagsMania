@@ -8,5 +8,5 @@ interface GameResultLocalRepository {
 
     fun getGameResults(): Flow<List<GameResult>>
 
-    suspend fun getFirstGameResult(): Flow<GameResult>
+    fun getFirstGameResult(): Flow<GameResult>
 }
