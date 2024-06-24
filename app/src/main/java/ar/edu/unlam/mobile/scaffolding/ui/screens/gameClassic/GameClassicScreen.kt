@@ -66,13 +66,18 @@ fun GameClassicScreen(
 
                         Spacer(modifier = Modifier.padding(24.dp))
 
-                        FlagCardGame(
-                            pts = viewModel.pts,
-                            actualCard = viewModel.actualCard,
-                            flagURL = viewModel.currentQuestion?.correctAnswer?.flag ?: "Argentina",
-                            Modifier,
-                            viewModel,
-                        )
+                        viewModel.currentQuestion?.correctAnswer?.flag?.let {
+                            FlagCardGame(
+                                pts = viewModel.pts,
+                                actualCard = viewModel.actualCard,
+                                flagURL = it,
+                                counter = viewModel.counter,
+                                onDecrementCounter = {
+                                    viewModel.decrementCounter()
+                                },
+                                Modifier,
+                            )
+                        }
                     }
                 }
 

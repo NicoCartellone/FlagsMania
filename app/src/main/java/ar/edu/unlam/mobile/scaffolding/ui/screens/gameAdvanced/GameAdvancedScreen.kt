@@ -68,17 +68,26 @@ fun GameAdvancedScreen(
 
                         Spacer(modifier = Modifier.padding(24.dp))
 
-                        CardCountryGame(
-                            pts = viewModel.pts,
-                            actualCard = viewModel.actualCard,
-                            viewModel = viewModel,
-                            Modifier,
-                        )
+                        viewModel.currentQuestion?.correctAnswer?.country?.let {
+                            CardCountryGame(
+                                pts = viewModel.pts,
+                                actualCard = viewModel.actualCard,
+                                counter = viewModel.counter,
+                                onDecrementCounter = {
+                                    viewModel.decrementCounter()
+                                },
+                                correctCountryName = it,
+                                Modifier,
+                            )
+                        }
                     }
                 }
 
                 FlowRow(
-                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    modifier =
+                        Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
                     QuestionFlagsOptions(

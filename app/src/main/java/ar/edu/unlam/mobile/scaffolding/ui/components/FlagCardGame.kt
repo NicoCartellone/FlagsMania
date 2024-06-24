@@ -29,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic.GameClassicViewModel
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 import coil.compose.AsyncImage
 import coil.decode.SvgDecoder
@@ -41,11 +40,12 @@ fun FlagCardGame(
     pts: Int = 0,
     actualCard: Int = 0,
     flagURL: String = "",
+    counter: Int = 10,
+    onDecrementCounter: () -> Unit,
     modifier: Modifier,
-    viewModel: GameClassicViewModel,
 ) {
     Box {
-        CounterHolder(modifier, viewModel)
+        CounterHolder(modifier, counter, onDecrementCounter)
         ElevatedCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             shape = RoundedCornerShape(16.dp),
@@ -107,14 +107,13 @@ fun FlagCardGame(
 @Composable
 fun CounterHolder(
     modifier: Modifier,
-    viewModel: GameClassicViewModel,
+    counter: Int,
+    onDecrementCounter: () -> Unit,
 ) {
-    val counter = viewModel.counter
-
     LaunchedEffect(counter) {
         while (counter >= 0) {
             delay(1000)
-            viewModel.decrementCounter()
+            onDecrementCounter()
         }
     }
 
@@ -146,14 +145,3 @@ fun CounterHolder(
         }
     }
 }
-
-// @Preview(showBackground = true)
-// @Composable
-// fun FlagCardGamePreview() {
-//    FlagCardGame(
-//        pts = 100,
-//        actualCard = 3,
-//        flagURL = "https://flagcdn.com/ar.svg",
-//        Modifier,
-//    )
-// }

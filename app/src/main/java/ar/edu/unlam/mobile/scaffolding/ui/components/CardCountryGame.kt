@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import ar.edu.unlam.mobile.scaffolding.ui.screens.gameAdvanced.GameAdvancedViewModel
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 import kotlinx.coroutines.delay
 
@@ -35,11 +34,13 @@ import kotlinx.coroutines.delay
 fun CardCountryGame(
     pts: Int = 0,
     actualCard: Int = 0,
-    viewModel: GameAdvancedViewModel,
+    counter: Int = 10,
+    onDecrementCounter: () -> Unit,
+    correctCountryName: String,
     modifier: Modifier,
 ) {
     Box {
-        CounterFlagHolder(modifier, viewModel)
+        CounterFlagHolder(modifier, counter, onDecrementCounter)
         ElevatedCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             shape = RoundedCornerShape(16.dp),
@@ -73,7 +74,7 @@ fun CardCountryGame(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
-                    viewModel.currentQuestion?.correctAnswer?.country.toString(),
+                    text = correctCountryName,
                     color = Color(0xFFC4007A),
                     fontFamily = AppFont.Quicksand,
                     fontSize = 32.sp,
@@ -98,14 +99,13 @@ fun CardCountryGame(
 @Composable
 fun CounterFlagHolder(
     modifier: Modifier,
-    viewModel: GameAdvancedViewModel,
+    counter: Int,
+    onDecrementCounter: () -> Unit,
 ) {
-    val counter = viewModel.counter
-
     LaunchedEffect(counter) {
         while (counter >= 0) {
             delay(1000)
-            viewModel.decrementCounter()
+            onDecrementCounter()
         }
     }
 
