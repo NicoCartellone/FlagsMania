@@ -7,4 +7,6 @@ interface GameResultLocalRepository {
     suspend fun saveGameResult(gameResult: GameResult)
 
     fun getGameResults(): Flow<List<GameResult>>
+
+    fun getFirstGameResult(): Flow<GameResult>
 }

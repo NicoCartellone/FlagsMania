@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens
+package ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile.scaffolding.data.network.CountryResponse
+import ar.edu.unlam.mobile.scaffolding.data.models.CountryResponse
 import ar.edu.unlam.mobile.scaffolding.data.repository.CountryRepository
 import ar.edu.unlam.mobile.scaffolding.domain.models.CountryOption
 import ar.edu.unlam.mobile.scaffolding.domain.models.GameQuestion
@@ -19,6 +19,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @Immutable
@@ -95,7 +98,8 @@ class GameClassicViewModel
                     }
                 } catch (e: Exception) {
                     println("==Error fetching countries: ${e.message}==")
-                    _uiState.value = GameClassicUIState.Error("Error fetching countries: ${e.message}")
+                    _uiState.value =
+                        GameClassicUIState.Error("Error fetching countries: ${e.message}")
                 }
             }
         }
@@ -113,14 +117,6 @@ class GameClassicViewModel
             showAnswer = true
             selectedCountry = answer
             quizGame?.answerQuestion(answer)
-            pts = quizGame?.calculateScore() ?: 0
-            evaluateOnAnswerQuestion()
-        }
-
-        fun nextFlagQuestion(answer: String) {
-            showAnswer = true
-            selectedCountry = answer
-            quizGame?.answerFlagQuestion(answer)
             pts = quizGame?.calculateScore() ?: 0
             evaluateOnAnswerQuestion()
         }
@@ -143,12 +139,17 @@ class GameClassicViewModel
         }
 
         private fun onGameEnd() {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+            val currentDate = dateFormat.format(Date())
+
             quizGame?.let {
                 val gameResult =
                     GameResult(
                         id = null,
                         points = pts,
                         correctAnswers = quizGame?.getCorrectAnswersCount() ?: 0,
+                        gameType = "Classic",
+                        gameDate = currentDate,
                         timestamp = System.currentTimeMillis(),
                     )
                 saveGameResult(gameResult)

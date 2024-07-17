@@ -1,11 +1,9 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens
+package ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,20 +24,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile.scaffolding.R
-import ar.edu.unlam.mobile.scaffolding.ui.components.CardCountryGame
+import ar.edu.unlam.mobile.scaffolding.domain.models.CountryOption
+import ar.edu.unlam.mobile.scaffolding.ui.components.FlagCardGame
 import ar.edu.unlam.mobile.scaffolding.ui.components.GradientComponent
-import ar.edu.unlam.mobile.scaffolding.ui.components.QuestionFlagsOptions
+import ar.edu.unlam.mobile.scaffolding.ui.components.OptionButton
+import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun GameAdvancedScreen(
+fun GameClassicScreen(
     controller: NavHostController,
     viewModel: GameClassicViewModel = hiltViewModel(),
 ) {
     val uiState: GameClassicUIState by viewModel.uiState.collectAsState()
 
     fun goToResult(controller: NavHostController) {
-        controller.navigate("GameResult/advance")
+        controller.navigate(NavHostRouterPaths.GameClassicResult.route)
     }
 
     viewModel.onCounterFinish = {
@@ -66,20 +66,23 @@ fun GameAdvancedScreen(
 
                         Spacer(modifier = Modifier.padding(24.dp))
 
-                        CardCountryGame(
-                            pts = viewModel.pts,
-                            actualCard = viewModel.actualCard,
-                            viewModel = viewModel,
-                            Modifier,
-                        )
+                        viewModel.currentQuestion?.correctAnswer?.flag?.let {
+                            FlagCardGame(
+                                pts = viewModel.pts,
+                                actualCard = viewModel.actualCard,
+                                flagURL = it,
+                                counter = viewModel.counter,
+                                onDecrementCounter = {
+                                    viewModel.decrementCounter()
+                                },
+                                Modifier,
+                            )
+                        }
                     }
                 }
 
-                FlowRow(
-                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                ) {
-                    QuestionFlagsOptions(
+                Column(modifier = Modifier.padding(16.dp)) {
+                    QuestionOptions(
                         viewModel.currentQuestion?.options,
                         viewModel.showAnswer,
                         viewModel.selectedCountry,
@@ -87,7 +90,7 @@ fun GameAdvancedScreen(
                             if (viewModel.actualCard == 10) {
                                 goToResult(controller)
                             }
-                            viewModel.nextFlagQuestion(it)
+                            viewModel.nextQuestion(it)
                         },
                     )
                 }
@@ -122,9 +125,33 @@ fun GameAdvancedScreen(
     }
 }
 
+@Composable
+fun QuestionOptions(
+    optionList: List<CountryOption>?,
+    readyToShowAnswer: Boolean,
+    selectedCountry: String,
+    onClick: (String) -> Unit = {},
+) {
+    optionList?.forEach {
+        if (readyToShowAnswer && it.country == selectedCountry) {
+            var backgroundColor = colorResource(R.color.failed)
+            if (it.correct) {
+                backgroundColor = colorResource(R.color.success)
+            }
+            OptionButton(it.country, backgroundColor, onClick = {
+                onClick(it)
+            })
+        } else {
+            OptionButton(it.country, onClick = {
+                onClick(it)
+            })
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
-fun AdvancedGameScreenPreview() {
+fun GameClassicScreenPreview() {
     val controller = rememberNavController()
-    GameAdvancedScreen(controller)
+    GameClassicScreen(controller)
 }

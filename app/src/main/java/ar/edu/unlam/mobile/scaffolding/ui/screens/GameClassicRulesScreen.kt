@@ -19,9 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import ar.edu.unlam.mobile.scaffolding.NavHostRouterPaths
 import ar.edu.unlam.mobile.scaffolding.R
 import ar.edu.unlam.mobile.scaffolding.ui.components.CustomButton
+import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 
 @Composable
@@ -102,7 +102,7 @@ fun GameClassicRulesScreen(controller: NavHostController) {
             Spacer(Modifier.height(24.dp))
             CustomButton(text = "Jugar") {
                 controller.navigate(
-                    NavHostRouterPaths.GAME_CLASSIC.route,
+                    NavHostRouterPaths.GameClassic.route,
                 )
             }
         }
