@@ -10,8 +10,16 @@ object ApiClient {
     private const val BASE_URL = "https://countryinfoapi.com/"
 
     val retrofit: Retrofit =
-        Retrofit.Builder()
+        Retrofit
+            .Builder()
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .baseUrl(BASE_URL)
+            .build()
+
+    val retrofitSheet: Retrofit =
+        Retrofit
+            .Builder()
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .baseUrl("https://script.google.com/")
             .build()
 }
