@@ -17,5 +17,7 @@ sealed class NavHostRouterPaths(
 
     object GameAdvancedRules : NavHostRouterPaths("GameAdvancedRules")
 
-    object PointsHistory : NavHostRouterPaths("PointsHistory")
+    object LocalRanking : NavHostRouterPaths("LocalRanking")
+
+    object OnlineRanking : NavHostRouterPaths("OnlineRanking")
 }

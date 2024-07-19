@@ -40,7 +40,7 @@ fun HomeScreen(
                         .padding(16.dp),
                 horizontalArrangement = Arrangement.End,
             ) {
-                IconButton(onClick = { controller.navigate(NavHostRouterPaths.PointsHistory.route) }) {
+                IconButton(onClick = { controller.navigate(NavHostRouterPaths.LocalRanking.route) }) {
                     Icon(
                         Icons.AutoMirrored.Filled.List,
                         contentDescription = "Back Honme",
