@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens.pointsHistory
+package ar.edu.unlam.mobile.scaffolding.ui.screens.localRanking
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
@@ -14,11 +14,15 @@ import javax.inject.Inject
 
 @Immutable
 sealed interface PointsHistoryListUIState {
-    data class Success(val historyPointsList: List<GameResult>) : PointsHistoryListUIState
+    data class Success(
+        val historyPointsList: List<GameResult>,
+    ) : PointsHistoryListUIState
 
     data object Loading : PointsHistoryListUIState
 
-    data class Error(val message: String) : PointsHistoryListUIState
+    data class Error(
+        val message: String,
+    ) : PointsHistoryListUIState
 }
 
 data class PointsHistoryUIState(
@@ -28,7 +32,9 @@ data class PointsHistoryUIState(
 @HiltViewModel
 class PointsHistoryViewModel
     @Inject
-    constructor(private val gameResultUseCase: GameResultUseCase) : ViewModel() {
+    constructor(
+        private val gameResultUseCase: GameResultUseCase,
+    ) : ViewModel() {
         private val _uiState =
             MutableStateFlow(
                 PointsHistoryUIState(

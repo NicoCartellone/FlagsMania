@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.ui.screens.pointsHistory
+package ar.edu.unlam.mobile.scaffolding.ui.screens.localRanking
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -40,7 +41,7 @@ import ar.edu.unlam.mobile.scaffolding.ui.navigation.NavHostRouterPaths
 import ar.edu.unlam.mobile.scaffolding.ui.theme.AppFont
 
 @Composable
-fun PointsHistoryScreen(
+fun LocalRankingScreen(
     controller: NavController,
     viewModel: PointsHistoryViewModel = hiltViewModel(),
 ) {
@@ -62,6 +63,14 @@ fun PointsHistoryScreen(
             modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
             textAlign = TextAlign.Center,
         )
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            Button(onClick = { controller.navigate(NavHostRouterPaths.LocalRanking.route) }) {
+                Text(text = "Hisorial offline")
+            }
+            Button(onClick = { controller.navigate(NavHostRouterPaths.OnlineRanking.route) }) {
+                Text(text = "Historial online")
+            }
+        }
         Spacer(modifier = Modifier.height(16.dp))
         when (val pointHistoryState = uiState.pointsHistoryState) {
             is PointsHistoryListUIState.Loading -> {
