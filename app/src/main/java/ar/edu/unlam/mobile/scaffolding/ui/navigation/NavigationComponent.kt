@@ -14,7 +14,8 @@ import ar.edu.unlam.mobile.scaffolding.ui.screens.gameAdvanced.GameAdvancedScree
 import ar.edu.unlam.mobile.scaffolding.ui.screens.gameAdvancedResult.GameAdvancedResultScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassic.GameClassicScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.gameClassicResult.GameClassicResultScreen
-import ar.edu.unlam.mobile.scaffolding.ui.screens.pointsHistory.PointsHistoryScreen
+import ar.edu.unlam.mobile.scaffolding.ui.screens.localRanking.LocalRankingScreen
+import ar.edu.unlam.mobile.scaffolding.ui.screens.onlineRanking.OnlineRankingScreen
 
 @Composable
 fun NavigationComponent() {
@@ -44,8 +45,11 @@ fun NavigationComponent() {
             composable(NavHostRouterPaths.GameAdvancedRules.route) {
                 GameAdvancedRulesScreen(controller)
             }
-            composable(NavHostRouterPaths.PointsHistory.route) {
-                PointsHistoryScreen(controller)
+            composable(NavHostRouterPaths.LocalRanking.route) {
+                LocalRankingScreen(controller)
+            }
+            composable(NavHostRouterPaths.OnlineRanking.route) {
+                OnlineRankingScreen(controller)
             }
         }
     }
