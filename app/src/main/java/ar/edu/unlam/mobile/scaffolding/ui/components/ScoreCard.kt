@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +38,6 @@ fun ScoreCard(
     counter: Int?,
     correctAnswers: Int?,
 ) {
-    Log.d("ScoreCard", "counter: $counter, correctAnswers: $correctAnswers")
     Box(
         contentAlignment = Alignment.TopCenter,
         modifier =
@@ -177,8 +175,7 @@ fun Avatar() {
                                     Color(0xFFC4007A),
                                 ),
                             ),
-                )
-                .zIndex(1f),
+                ).zIndex(1f),
     ) {
         Box(
             modifier =
